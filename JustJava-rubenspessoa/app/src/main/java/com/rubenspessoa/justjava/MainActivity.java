@@ -3,7 +3,9 @@ package com.rubenspessoa.justjava;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
+
 import java.text.NumberFormat;
 
 /**
@@ -23,15 +25,30 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage = "Total: $ " + count * 5 + "\nThank you!";
+        CheckBox wcCb = (CheckBox) findViewById(R.id.checkbox_whipped_cream);
+        boolean wcChecked = wcCb.isChecked();
+
+        CheckBox cCb = (CheckBox) findViewById(R.id.checkbox_chocolate);
+        boolean cChecked = cCb.isChecked();
+
+        String priceMessage = generateOrderSummary(count, wcChecked, cChecked);
         displayMessage(priceMessage);
-        //displayPrice(count * 5);
     }
+
+    /**
+     * Increase by 1 the count of Coffees.
+     * @param view
+     */
 
     public void increaseCount(View view) {
         count++;
         display(count);
     }
+
+    /**
+     * Decrease by 1 the count of Coffees.
+     * @param view
+     */
 
     public void decreaseCount(View view) {
         if (count > 0) {
@@ -64,5 +81,15 @@ public class MainActivity extends ActionBarActivity {
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_view);
         priceTextView.setText(message);
+    }
+
+    private String generateOrderSummary(int quantity, boolean whippedCreamChecked, boolean chocolateChecked) {
+        String priceMessage = "Name: Lyla the Labyrinth\n" +
+                "Add whipped cream? "+ whippedCreamChecked + "\n" +
+                "Chocolate? "+ chocolateChecked + "\n" +
+                "Quantity: " + quantity + "\n" +
+                "Total: $ " + count * 5 + "\n" +
+                "Thank you!";
+        return priceMessage;
     }
 }
