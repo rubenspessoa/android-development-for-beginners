@@ -1,13 +1,13 @@
 package com.rubenspessoa.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.text.NumberFormat;
 
 /**
  * This app displays an order form to order coffee.
@@ -35,8 +35,16 @@ public class MainActivity extends ActionBarActivity {
         CheckBox cCb = (CheckBox) findViewById(R.id.checkbox_chocolate);
         boolean cChecked = cCb.isChecked();
 
-        String priceMessage = generateOrderSummary(nameCustomer, count, wcChecked, cChecked);
-        displayMessage(priceMessage);
+        String message = generateOrderSummary(nameCustomer, count, wcChecked, cChecked);
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just Java order for " + nameCustomer);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     /**
@@ -70,33 +78,55 @@ public class MainActivity extends ActionBarActivity {
         quantityTextView.setText("" + number);
     }
 
-
     /**
      * This method displays the given price on the screen.
      */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
+    //private void displayPrice(int number) {
+    //    TextView priceTextView = (TextView) findViewById(R.id.price_view);
+    //    priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+    //}
 
     /**
      * This method displays the given text on the screen.
      */
-    private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_view);
-        priceTextView.setText(message);
+    //private void displayMessage(String message) {
+    //    TextView priceTextView = (TextView) findViewById(R.id.price_view);
+    //    priceTextView.setText(message);
+    //}
+
+    /**
+     * This method calculates the price for the order.
+     * @param quantity
+     * @param whippedCream
+     * @param chocolate
+     * @return
+     */
+
+    private int calculatePrice(int quantity, boolean whippedCream, boolean chocolate) {
+        int basePrice = 5;
+
+        if (whippedCream) {
+           basePrice++;
+        }
+
+        if (chocolate) {
+            basePrice += 2;
+        }
+
+        return basePrice * quantity;
     }
 
+    /**
+     * This method generates a summary for the order.
+     * @param name
+     * @param quantity
+     * @param whippedCreamChecked
+     * @param chocolateChecked
+     * @return
+     */
+
     private String generateOrderSummary(String name, int quantity, boolean whippedCreamChecked, boolean chocolateChecked) {
-        int price = count * 5;
-
-        if (whippedCreamChecked) {
-            price += count * 1;
-        }
-
-        if (chocolateChecked) {
-            price += count * 2;
-        }
+        int price = calculatePrice(quantity, whippedCreamChecked, chocolateChecked);
 
         String priceMessage = "Name: "+ name + "\n" +
                 "Add whipped cream? "+ whippedCreamChecked + "\n" +
