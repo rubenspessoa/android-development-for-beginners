@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -25,13 +26,16 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        EditText nameText = (EditText) findViewById(R.id.text_name);
+        String nameCustomer = nameText.getText().toString();
+
         CheckBox wcCb = (CheckBox) findViewById(R.id.checkbox_whipped_cream);
         boolean wcChecked = wcCb.isChecked();
 
         CheckBox cCb = (CheckBox) findViewById(R.id.checkbox_chocolate);
         boolean cChecked = cCb.isChecked();
 
-        String priceMessage = generateOrderSummary(count, wcChecked, cChecked);
+        String priceMessage = generateOrderSummary(nameCustomer, count, wcChecked, cChecked);
         displayMessage(priceMessage);
     }
 
@@ -83,13 +87,24 @@ public class MainActivity extends ActionBarActivity {
         priceTextView.setText(message);
     }
 
-    private String generateOrderSummary(int quantity, boolean whippedCreamChecked, boolean chocolateChecked) {
-        String priceMessage = "Name: Lyla the Labyrinth\n" +
+    private String generateOrderSummary(String name, int quantity, boolean whippedCreamChecked, boolean chocolateChecked) {
+        int price = count * 5;
+
+        if (whippedCreamChecked) {
+            price += count * 1;
+        }
+
+        if (chocolateChecked) {
+            price += count * 2;
+        }
+
+        String priceMessage = "Name: "+ name + "\n" +
                 "Add whipped cream? "+ whippedCreamChecked + "\n" +
                 "Chocolate? "+ chocolateChecked + "\n" +
                 "Quantity: " + quantity + "\n" +
-                "Total: $ " + count * 5 + "\n" +
+                "Total: $ " + price + "\n" +
                 "Thank you!";
+
         return priceMessage;
     }
 }
