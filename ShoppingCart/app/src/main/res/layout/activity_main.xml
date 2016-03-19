@@ -5,32 +5,32 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shoppingcart"
-        android:scaleType="centerCrop" />
+        />
 
     <ListView
         android:id="@+id/listListasDeCompras"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
-        android:layout_margin="10dp"
-        android:visibility="visible"
-        android:background="#FFFFFF">
-    </ListView>
+        android:layout_margin="20dp"
+        android:layout_above="@+id/buttonAdicionar"
+        android:background="#FFFFFF"/>
 
     <Button
         android:id="@+id/buttonAdicionar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:layout_alignLeft="@+id/listListasDeCompras"
         android:layout_alignParentBottom="true"
-        android:text="Criar Nova lista"
-        android:textAllCaps="true"
-        android:background="#FFFFFF" />
+        android:text="Criar nova lista"
+        android:textColor="@android:color/darker_gray"
+        android:background="#FFFFFF"/>
 
 </RelativeLayout>
