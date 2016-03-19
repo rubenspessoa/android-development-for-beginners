@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ListaDeProdutos" >
+
+    <ImageButton
+        android:id="@+id/ButtonOrdenado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/ic_menu_sort_alphabetically" />
+
+    <Button
+        android:id="@+id/addProduto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Adicionar produto" />
+
+    <EditText
+        android:id="@+id/ediBusca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listProdutos"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btnBusca"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <ImageView
+        android:id="@+id/btnBusca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listProdutos"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/ButtonOrdenado"
+        android:src="@android:drawable/ic_search_category_default" />
+
+    <ListView
+        android:id="@+id/listProdutos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignLeft="@+id/ediBusca"
+        android:layout_below="@+id/ButtonOrdenado"
+        android:layout_marginBottom="50dp" >
+
+    </ListView>
+
+</RelativeLayout>

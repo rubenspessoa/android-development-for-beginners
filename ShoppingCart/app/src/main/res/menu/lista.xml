@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    
+    
+	<item android:id="@+id/excluirLista"
+          android:title="Excluir lista"
+          android:icon="@drawable/ic_delete"
+          android:alphabeticShortcut="n"
+          android:showAsAction="ifRoom|withText" />
+	
+	<item android:id="@+id/addNaLista"
+          android:title="Adicionar produto a lista"
+          android:icon="@drawable/ic_add_na_lista"
+          android:alphabeticShortcut="n"
+          android:showAsAction="ifRoom|withText" />
+</menu>

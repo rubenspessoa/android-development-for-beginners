@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >   
+    <item
+        android:id="@+id/lista_de_produto"
+        android:title="Checar lista de produtos"/>
+    
+    <item
+        android:id="@+id/adicionar_produto"
+        android:title="Adicionar Produto"/>
+    
+    
+    <item
+        android:id="@+id/sugerir_lista"
+        android:title="Sugestão de lista de compras"/>
+
+</menu>
